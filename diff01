@@ -1,0 +1,47 @@
+using System;
+
+namespace Differential
+{
+    class MainClass
+    {
+        public static void Main(string[] args)
+        {
+            _ = new Differential();
+        }
+    }
+    //∮[0,1] x^2 dx
+    //lim[da->0] (fx-fx0)/dw
+    class Differential
+    {
+        public Differential()
+        {
+            double fx, fx0;//Function
+            double theta;//angle
+            double qn;//qn
+            double ih;//Integral
+            double dw;//delta acos(theta)
+            double dh;//delta asin(theta)
+            double n;//end value
+            double da;//delta a
+            da = 1.0e-6;
+            n = 1.0;
+            fx = ih = 0.0;
+            for (qn = 0.0; qn < n;)
+            {
+                fx0 = fx;
+                fx = Function(qn);
+                //theta0 = theta;
+                theta = Math.Atan(fx-fx0);
+                dw = da* Math.Cos(theta);
+                dh = da*Math.Sin(theta);
+                Console.Write("{0} differential:{1} fx:{2}\n", qn, dh/da/da,ih/da);
+                qn += dw;
+                ih += dh;
+            }
+        }
+        public double Function(double x)
+        {
+            return x*x;
+        }
+    }
+}
